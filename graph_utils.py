@@ -13,7 +13,7 @@ def get_list_nodes(G):
     """
         returns list of nodes for graph G
     """
-    return [node['id'] for node in G['nodes']]
+    return [node['identificador'] for node in G['nodes']]
 
 def get_list_adj_nodes(G, node):
     """

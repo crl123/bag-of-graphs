@@ -18,24 +18,34 @@ def jdefault(o):
 
 def write_json(fileName, grafo):
     f = open(fileName, mode='w')
-    tex =json.dumps(grafo, default=jdefault)
-    json.dump(tex,f)
+    json.dump(dict(nodes = grafo.nodes, edges = grafo.edges), f)
     f.close()
+    """
+    tex = json.dumps(grafo, default=jdefault)
+    json.dump(tex, f)
+    f.close()
+    """
 
 def make_structure(texto):
+    nodos = texto.split(' ')
+    lisnodos = [dict(identificador=nodo) for nodo in nodos]
+    lisres = [dict(source=nodo_source, target=nodo_target) for nodo_source, nodo_target in zip(nodos[:-1], nodos[1:])]
+    return graph(lisnodos, lisres)
+    """
     lista =texto.split(" ")
     lisnodos=[]
     lisres=[]
     anterior=""
     for i in lista:
         a=ident(i)
-        lisnodos.insert(len(lisnodos),a)
+        lisnodos.append(a)
         if anterior != "":
             c=relacion(anterior,i)
             lisres.insert(len(lisres),c)
         anterior=i
     grafo=graph(lisnodos,lisres)
     return grafo
+    """
 
 def function_make_graph():
     texto=raw_input()
